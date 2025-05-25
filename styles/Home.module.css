@@ -1,0 +1,54 @@
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  .title {
+    font-size: 1.5rem;
+    color: #e3350d;
+  }
+  .addButton {
+    background: #e3350d;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .pokemonList {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .card {
+    position: relative;
+    background: #fff;
+    border: 2px solid #e3350d;
+    border-radius: 12px;
+    padding: 1.5rem 1rem 1rem;
+    text-align: center;
+  }
+  .pokeball {
+    width: 40px;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    opacity: 0.5;
+  }
+  .pokemonName {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  .pokemonPrice {
+    color: #555;
+  }
+  

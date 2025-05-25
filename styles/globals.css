@@ -1,13 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 body {
-  font-family: sans-serif;
   margin: 0;
-  padding: 0;
+  background: #f0f4f8;
+  font-family: 'Press Start 2P', cursive;
+  color: #333;
 }
 a {
   text-decoration: none;
-  color: inherit;
+}
+button {
+  font-family: inherit;
 }
