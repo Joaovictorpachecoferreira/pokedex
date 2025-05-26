@@ -1,4 +1,3 @@
-// /pages/vendidos.js
 import { useContext } from 'react';
 import PokemonsContext from '../context/PokemonsContext';
 
