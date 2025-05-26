@@ -4,11 +4,14 @@ import axios from 'axios';
 
 const PokemonsContext = createContext({
   pokemons: [],
-  setPokemons: () => {}
+  setPokemons: () => {},
+  vendidos: [],
+  setVendidos: () => {}
 });
 
 export const PokemonsProvider = ({ children }) => {
   const [pokemons, setPokemons] = useState([]);
+  const [vendidos, setVendidos] = useState([]);
 
   useEffect(() => {
     const fetchPokemons = async () => {
@@ -40,10 +43,9 @@ export const PokemonsProvider = ({ children }) => {
   }, []);
 
   return (
-    <PokemonsContext.Provider value={{ pokemons, setPokemons }}>
+    <PokemonsContext.Provider value={{ pokemons, setPokemons, vendidos, setVendidos }}>
       {children}
     </PokemonsContext.Provider>
   );
 };
-
 export default PokemonsContext;
