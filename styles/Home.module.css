@@ -74,3 +74,20 @@
 .pokemonPrice {
   color: #555;
 }
+
+
+.sellButton {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  transition: background 0.3s ease;
+}
+
+.sellButton:hover {
+  background: #218838;
+}
