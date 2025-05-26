@@ -9,11 +9,14 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
 .title {
   font-size: 1.5rem;
   color: #e3350d;
+  text-align: center;
+  width: 100%;
 }
 
 .addButton {
@@ -23,7 +26,7 @@
   padding: 0.5rem 1rem;
   border-radius: 8px;
   cursor: pointer;
-  margin: 0 0.5rem;
+  margin: 0.5rem;
   font-weight: bold;
   transition: background 0.3s ease;
 }
@@ -49,28 +52,6 @@
   text-align: center;
 }
 
-.pokemonImageContainer {
-  width: 100%;
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.pokemonImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.pokemonInfo {
-  padding: 1rem;
-}
-
 .pokemonName {
   font-weight: bold;
   margin-bottom: 0.5rem;
@@ -82,7 +63,7 @@
 }
 
 .sellButton {
-  background: #74e30d;
+  background: #08f500;
   color: white;
   border: none;
   padding: 0.5rem 0.75rem;
@@ -94,7 +75,7 @@
 }
 
 .sellButton:hover {
-  background: #3cc10b;
+  background: #0bc154;
 }
 
 .pokeball {
