@@ -1,4 +1,3 @@
-// /pokedex-main/pages/novo-pokemon.js
 import { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import PokemonsContext from '../context/PokemonsContext';
@@ -7,14 +6,21 @@ import styles from '../styles/NovoPokemon.module.css';
 export default function NovoPokemon() {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
-  const [image, setImage] = useState(''); // Novo estado para a imagem
+  const [imageFile, setImageFile] = useState(null);
   const { pokemons, setPokemons } = useContext(PokemonsContext);
   const router = useRouter();
 
   function handleSubmit(e) {
     e.preventDefault();
-    setPokemons([...pokemons, { name, price: parseFloat(price), image }]); // Adiciona a imagem ao novo pokémon
-    router.push('/');
+    if (!imageFile) return alert('Selecione uma imagem.');
+
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const imageDataUrl = event.target.result;
+      setPokemons([...pokemons, { name, price: parseFloat(price), image: imageDataUrl, custom: true }]);
+      router.push('/');
+    };
+    reader.readAsDataURL(imageFile);
   }
 
   return (
@@ -43,12 +49,12 @@ export default function NovoPokemon() {
           />
         </div>
         <div className={styles.inputGroup}>
-          <label className={styles.label}>URL da Imagem:</label>
+          <label className={styles.label}>Imagem:</label>
           <input
             className={styles.input}
-            type="text"
-            value={image}
-            onChange={e => setImage(e.target.value)}
+            type="file"
+            accept="image/*"
+            onChange={e => setImageFile(e.target.files[0])}
             required
           />
         </div>
