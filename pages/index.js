@@ -1,3 +1,4 @@
+// /pokedex-main/pages/index.js
 import Link from 'next/link';
 import { useContext } from 'react';
 import PokemonsContext from '../context/PokemonsContext';
@@ -22,8 +23,8 @@ export default function Home() {
           {pokemons.map((p, i) => (
             <li key={i} className={styles.card}>
               <img
-                src="/pokeball.png"
-                alt="pokébola"
+                src={p.image}
+                alt={p.name}
                 className={styles.pokeball}
               />
               <div className={styles.pokemonName}>{p.name}</div>

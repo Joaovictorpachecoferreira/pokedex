@@ -1,11 +1,9 @@
+// /pokedex-main/pages/_app.js
 import '../styles/globals.css';
-import { useState } from 'react';
-import PokemonsContext from '../context/PokemonsContext';
 import Head from 'next/head';
+import { PokemonsProvider } from '../context/PokemonsContext';
 
 function MyApp({ Component, pageProps }) {
-  const [pokemons, setPokemons] = useState([]);
-
   return (
     <>
       <Head>
@@ -16,9 +14,9 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
 
-      <PokemonsContext.Provider value={{ pokemons, setPokemons }}>
+      <PokemonsProvider>
         <Component {...pageProps} />
-      </PokemonsContext.Provider>
+      </PokemonsProvider>
     </>
   );
 }

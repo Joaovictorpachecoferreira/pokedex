@@ -1,3 +1,4 @@
+// /pokedex-main/pages/novo-pokemon.js
 import { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import PokemonsContext from '../context/PokemonsContext';
@@ -6,12 +7,13 @@ import styles from '../styles/NovoPokemon.module.css';
 export default function NovoPokemon() {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
+  const [image, setImage] = useState(''); // Novo estado para a imagem
   const { pokemons, setPokemons } = useContext(PokemonsContext);
   const router = useRouter();
 
   function handleSubmit(e) {
     e.preventDefault();
-    setPokemons([...pokemons, { name, price: parseFloat(price) }]);
+    setPokemons([...pokemons, { name, price: parseFloat(price), image }]); // Adiciona a imagem ao novo pokémon
     router.push('/');
   }
 
@@ -37,6 +39,16 @@ export default function NovoPokemon() {
             step="0.01"
             value={price}
             onChange={e => setPrice(e.target.value)}
+            required
+          />
+        </div>
+        <div className={styles.inputGroup}>
+          <label className={styles.label}>URL da Imagem:</label>
+          <input
+            className={styles.input}
+            type="text"
+            value={image}
+            onChange={e => setImage(e.target.value)}
             required
           />
         </div>
