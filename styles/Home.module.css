@@ -48,8 +48,33 @@
   background: #fff;
   border: 2px solid #e3350d;
   border-radius: 12px;
-  padding: 1.5rem 1rem;
+  padding: 1rem; /* Ajuste o padding conforme necessário */
   text-align: center;
+  overflow: hidden; /* Garante que a imagem não saia do card */
+  height: 250px; /* Altura fixa para o card */
+}
+
+.pokemonImageContainer {
+  width: 100%; /* Largura do contêiner da imagem */
+  height: 100px; /* Altura fixa para manter a proporção quadrada */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden; /* Garante que a imagem não saia do contêiner */
+  margin-bottom: 1rem; /* Espaço entre a imagem e as informações */
+}
+
+.pokemonImage {
+  width: 100%; /* Largura da imagem ocupa 100% do contêiner */
+  height: 100%; /* Altura da imagem ocupa 100% do contêiner */
+  object-fit: cover; /* Ajusta a imagem para cobrir o quadrado */
+}
+
+.pokemonInfo {
+  padding: 0.5rem; /* Ajuste o padding conforme necessário */
 }
 
 .pokemonName {

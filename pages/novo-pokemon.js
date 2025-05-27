@@ -6,7 +6,8 @@ import styles from '../styles/NovoPokemon.module.css';
 export default function NovoPokemon() {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
-  const [imageFile, setImageFile] = useState(null);
+  const [image, setImage] = useState(''); // Novo estado para a imagem
+  const [imageFile, setImageFile] = useState(null); // Estado para o arquivo de imagem
   const { pokemons, setPokemons } = useContext(PokemonsContext);
   const router = useRouter();
 
@@ -21,6 +22,18 @@ export default function NovoPokemon() {
       router.push('/');
     };
     reader.readAsDataURL(imageFile);
+  }
+
+  function handleImageChange(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result); // Define a imagem como a URL do arquivo
+      };
+      reader.readAsDataURL(file);
+      setImageFile(file); // Armazena o arquivo de imagem
+    }
   }
 
   return (
@@ -49,14 +62,17 @@ export default function NovoPokemon() {
           />
         </div>
         <div className={styles.inputGroup}>
-          <label className={styles.label}>Imagem:</label>
+          <label className={styles.label}>Selecionar Imagem:</label>
           <input
             className={styles.input}
             type="file"
             accept="image/*"
-            onChange={e => setImageFile(e.target.files[0])}
+            onChange={handleImageChange}
             required
           />
+        </div>
+        <div className={styles.imagePreview}>
+          {image && <img src={image} alt="Preview" className={styles.pokemonImage} />}
         </div>
         <button type="submit" className={styles.submitButton}>
           Cadastrar
