@@ -1,4 +1,3 @@
-// /pages/pokemon/[name].js
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -6,35 +5,92 @@ import axios from 'axios';
 export default function PokemonDetail() {
   const router = useRouter();
   const { name } = router.query;
+
   const [pokemon, setPokemon] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    if (name) {
-      axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
-        .then((res) => {
-          const data = res.data;
-          setPokemon({
-            name: data.name,
-            id: data.id,
-            image: data.sprites.other['official-artwork'].front_default || data.sprites.front_default,
-            height: data.height,
-            weight: data.weight,
-            types: data.types.map(t => t.type.name),
-            abilities: data.abilities.map(a => a.ability.name),
-            stats: data.stats.map(s => ({
-              name: s.stat.name,
-              base: s.base_stat
-            })),
-            baseExperience: data.base_experience,
-            forms: data.forms.map(f => f.name),
-            moves: data.moves.map(m => m.move.name),
-          });
-        })
-        .catch((err) => console.error('Erro ao buscar Pokémon:', err));
-    }
+    const fetchPokemon = async () => {
+      if (!name) return;
+
+      try {
+        const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`);
+        const data = res.data;
+        setPokemon({
+          name: data.name,
+          id: data.id,
+          image: data.sprites.other['official-artwork'].front_default || data.sprites.front_default,
+          height: data.height,
+          weight: data.weight,
+          types: data.types.map(t => t.type.name),
+          abilities: data.abilities.map(a => a.ability.name),
+          stats: data.stats.map(s => ({
+            name: s.stat.name,
+            base: s.base_stat
+          })),
+          baseExperience: data.base_experience,
+          forms: data.forms.map(f => f.name),
+          moves: data.moves.map(m => m.move.name),
+        });
+        setNotFound(false);
+      } catch (error) {
+        // Se for erro 404, significa que o Pokémon não existe na PokéAPI
+        if (error.response && error.response.status === 404) {
+          setNotFound(true);
+        } else {
+          console.error('Erro inesperado ao buscar Pokémon:', error);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPokemon();
   }, [name]);
 
-  if (!pokemon) return <p style={{ textAlign: 'center' }}>Carregando...</p>;
+  if (loading) {
+    return <p style={{ textAlign: 'center', fontFamily: 'Arial' }}>Carregando...</p>;
+  }
+
+  if (notFound) {
+    return (
+      <div style={{
+        textAlign: 'center',
+        marginTop: '3rem',
+        padding: '2rem',
+        maxWidth: '500px',
+        marginInline: 'auto',
+        border: '2px solid #e3350d',
+        borderRadius: '10px',
+        background: '#fff3f3',
+        fontFamily: 'Arial'
+      }}>
+        <h2 style={{ color: '#e3350d' }}>⚠️ Pokémon desconhecido</h2>
+        <p>Este Pokémon foi adicionado manualmente e não possui informações na Pokedex.</p>
+        <img
+          src="/imgsad/sadpikachu.png"
+          alt="Pokémon triste"
+          style={{ marginTop: '1rem', width: '70px' }}
+         />
+        <div style={{ marginTop: '2rem' }}>
+          <button
+            onClick={() => router.push('/')}
+            style={{
+              padding: '0.5rem 1rem',
+              background: '#e3350d',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer'
+            }}
+          >
+            Voltar à Home
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{
@@ -76,11 +132,10 @@ export default function PokemonDetail() {
         <div style={{ marginTop: '1rem' }}>
           <h3 style={{ borderBottom: '1px solid #ccc' }}>Estatísticas</h3>
           <ul style={{ paddingLeft: '1rem', listStyleType: 'none' }}>
-  {pokemon.stats.map((s, i) => (
-    <li key={i}><strong>{s.name}:</strong> {s.base}</li>
-  ))}
-</ul>
-
+            {pokemon.stats.map((s, i) => (
+              <li key={i}><strong>{s.name}:</strong> {s.base}</li>
+            ))}
+          </ul>
         </div>
 
         <div style={{ marginTop: '1rem' }}>
@@ -90,12 +145,11 @@ export default function PokemonDetail() {
 
         <div style={{ marginTop: '1rem' }}>
           <h3 style={{ borderBottom: '1px solid #ccc' }}>Movimentos (10 primeiros)</h3>
-         <ul style={{ paddingLeft: '1rem', listStyleType: 'none' }}>
-  {pokemon.moves.slice(0, 10).map((m, i) => (
-    <li key={i}>{m}</li>
-  ))}
-</ul>
-
+          <ul style={{ paddingLeft: '1rem', listStyleType: 'none' }}>
+            {pokemon.moves.slice(0, 10).map((m, i) => (
+              <li key={i}>{m}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

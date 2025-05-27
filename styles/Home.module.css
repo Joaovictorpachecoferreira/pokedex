@@ -1,4 +1,3 @@
-/* /pokedex-main/pokedex-main/styles/Home.module.css */
 .container {
   max-width: 800px;
   margin: 2rem auto;
@@ -10,11 +9,14 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
 .title {
   font-size: 1.5rem;
   color: #e3350d;
+  text-align: center;
+  width: 100%;
 }
 
 .addButton {
@@ -24,6 +26,13 @@
   padding: 0.5rem 1rem;
   border-radius: 8px;
   cursor: pointer;
+  margin: 0.5rem;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.addButton:hover {
+  background: #c12c0b;
 }
 
 .pokemonList {
@@ -79,7 +88,7 @@
 }
 
 .sellButton {
-  background: #28a745;
+  background: #08f500;
   color: white;
   border: none;
   padding: 0.5rem 0.75rem;
@@ -91,5 +100,11 @@
 }
 
 .sellButton:hover {
-  background: #218838;
+  background: #0bc154;
+}
+
+.pokeball {
+  max-width: 100px;
+  height: auto;
+  object-fit: contain;
 }

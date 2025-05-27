@@ -35,6 +35,12 @@
   padding: 0.75rem;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.submitButton:hover {
+  background: #c12c0b;
 }
 
 .imagePreview {
@@ -56,3 +62,4 @@
   max-height: 100%; /* Limita a altura máxima da imagem à altura da caixa */
   object-fit: cover; /* Ajusta a imagem para cobrir o quadrado */
 }
+

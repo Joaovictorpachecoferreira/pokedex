@@ -46,12 +46,17 @@ export default function Home() {
               </div>
 
               {/* Botão de vender */}
-              <button
-                className={styles.sellButton}
-                onClick={() => venderPokemon(p)}
-              >
-                {vendidos.some(v => v.name === p.name) ? 'Vendido' : 'Vender'}
-              </button>
+            <button
+              className={
+                vendidos.some(v => v.name === p.name)
+                  ? styles.vendido
+                  : styles.sellButton
+              }
+              disabled={vendidos.some(v => v.name === p.name)}
+              onClick={() => venderPokemon(p)}
+            >
+              {vendidos.some(v => v.name === p.name) ? 'Vendido' : 'Vender'}
+            </button>
             </li>
           ))}
         </ul>

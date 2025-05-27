@@ -1,12 +1,15 @@
 body {
   margin: 0;
-  background: #f0f4f8;
+  background: url('/b72fa158-27ad-43bb-8116-dfe05f3c5a4c.png') repeat;
+  background-size: 64px 64px;
   font-family: 'Press Start 2P', cursive;
   color: #333;
 }
+
 a {
   text-decoration: none;
 }
+
 button {
   font-family: inherit;
 }

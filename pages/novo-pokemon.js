@@ -1,4 +1,3 @@
-// /pokedex-main/pages/novo-pokemon.js
 import { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import PokemonsContext from '../context/PokemonsContext';
@@ -14,8 +13,15 @@ export default function NovoPokemon() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setPokemons([...pokemons, { name, price: parseFloat(price), image }]); // Adiciona a imagem ao novo pokémon
-    router.push('/');
+    if (!imageFile) return alert('Selecione uma imagem.');
+
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const imageDataUrl = event.target.result;
+      setPokemons([...pokemons, { name, price: parseFloat(price), image: imageDataUrl, custom: true }]);
+      router.push('/');
+    };
+    reader.readAsDataURL(imageFile);
   }
 
   function handleImageChange(e) {
