@@ -1,4 +1,4 @@
-
+/* /pokedex-main/pokedex-main/styles/NovoPokemon.module.css */
 .container {
   max-width: 400px;
   margin: 2rem auto;
@@ -40,11 +40,19 @@
 .imagePreview {
   margin-top: 1rem;
   text-align: center;
+  width: 100px; /* Largura fixa para a caixa da imagem */
+  height: 100px; /* Altura fixa para a caixa da imagem */
+  border: 2px solid #ccc; /* Borda para a caixa */
+  border-radius: 8px; /* Bordas arredondadas */
+  overflow: hidden; /* Garante que a imagem não saia do contêiner */
+  display: flex; /* Flexbox para centralizar a imagem */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
 }
 
 .pokemonImage {
-  width: 100px; /* Largura fixa */
-  height: 100px; /* Altura fixa */
+  width: 100%; /* Largura da imagem ocupa 100% da caixa */
+  height: auto; /* Altura automática para manter a proporção */
+  max-height: 100%; /* Limita a altura máxima da imagem à altura da caixa */
   object-fit: cover; /* Ajusta a imagem para cobrir o quadrado */
-  border-radius: 8px; /* Bordas arredondadas */
 }
